@@ -1,0 +1,30 @@
+.nav{
+    background-color: #060b26;
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userDiv {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+    gap: 20px;
+}
+
+.logoDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.pstyle{
+    align-self: center;
+    font-size: 30px;
+    font-family: sans-serif;
+    margin: 0;
+    color: whitesmoke;
+    font-weight: bold;
+}
+

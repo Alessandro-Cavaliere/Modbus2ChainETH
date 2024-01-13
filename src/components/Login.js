@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
     faCheck,
     faTimes,
@@ -7,31 +7,18 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import styles from "./styles/Login.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
-import { AiOutlineClose } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
-import { FiArrowLeft } from "react-icons/fi";
+import { useCookies } from "react-cookie";
+import { toast } from "react-toastify";
+const https = require('https');
 
-const Login = () => {
+const Login = ({handleLoggedUser}) => {
     const navigate = useNavigate();
     const userRef = useRef();
-    const errRef = useRef();
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
+    const [cookies, setCookie] = useCookies(["accessToken"]);
 
-    const [confirm, setConfirm] = useState(queryParams.get("confirm"));
-    const [activation, setActivation] = useState(queryParams.get("activation"));
-
-    const LOGIN_URL = "/api/login";
-    const VERIFY_OTP_URL = "/api/verifyOTP";
-
-    const [verifyError, setVerifyError] = useState("");
-    const [authCode, setAuthCode] = useState("");
-    const [accessToken, setAccessToken] = useState(null);
-    const [show2FAForm, setShow2FAForm] = useState(false);
-    const [is2FA, setIs2FA] = useState(false);
-    const [failure, setFailure] = useState(false);
     const [inputType, setInputType] = useState("password");
     const [email, setEmail] = useState("");
     const [validEmail, setValidEmail] = useState(false);
@@ -41,27 +28,9 @@ const Login = () => {
 
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
-    const [showRecover, setShowRecover] = useState(false);
-
-    const [showResetFormPassword, setShowResetFormPassword] = useState(false);
 
     const toggleInputType = () => {
         setInputType(inputType === "password" ? "text" : "password");
-    };
-
-    const handleErrorSendEmail = () => {
-        setFailure(false);
-        setErrMsg("");
-    };
-
-    const handleConfirmation = () => {
-        setConfirm("");
-        navigate("/login");
-    };
-
-    const handleActivation = () => {
-        setActivation("");
-        navigate("/login");
     };
 
     const handleChangeEmail = (e) => {
@@ -74,118 +43,51 @@ const Login = () => {
         setPwd(e.target.value);
     };
 
-    const handleVerifyToken = async () => {
-        try {
-            const response = await axios.post(
-                "baseUrl" ,
-                {
-                    otp: authCode
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                }
-            );
-            console.log(response);
-            return true;
-        } catch (error) {
-            console.log(error);
-            setVerifyError(error.response.data.message);
-            return false;
-        }
-    };
-
     useEffect(() => {
-        setValidEmail(true); // Manteniamo la validazione dell'email qui se necessario
+        setValidEmail(true); 
     }, []);
-
-    const handleShowRecover = () => {
-        setEmail("");
-        setShowRecover(!showRecover);
-    };
-
-    const handleAuthCode = (event) => {
-        setVerifyError("");
-        let value = event.target.value;
-        const regex = /^[0-9]{0,6}$/;
-        if (regex.test(value)) {
-            setAuthCode(value);
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Verificare la validità dell'email, se necessario
         try {
             const response = await axios.post(
-                "baseUrl" ,
+                process.env.REACT_APP_MIDDLEWARE_BASE_URL + "login",
                 {
-                    username: email,
+                    email: email,
                     password: pwd,
                 },
                 {
                     headers: {
                         Authorization: `Bearer ${process.env.REACT_APP_SECRET_APP}`,
                         "Content-Type": "application/x-www-form-urlencoded",
-                    },
+                    }
                 }
             );
-            const accessToken = response.data.data.token;
-            let is2FALog = response.data.data.twofa;
-            setAccessToken(accessToken);
-            setIs2FA(is2FALog);
+            console.log(response)
+            const accessToken = response.data.token;
+            setCookie('accessToken', accessToken, { secure: true, sameSite: 'strict' });
+            toast.success("Correct credentials!", {
+                onClose: () => {
+                    handleNavigation()
+                },
+            });
             
         } catch (err) {
+            console.log(err)
             if (err.response) {
-                setErrMsg(err.response.data.message);
-            } else {
-                setErrMsg(err.message);
-            }
-            errRef.current.focus();
+                toast.error(err.response.data.error)
+            } 
         }
     };
 
-    const handleNavigation = async (accessToken) => {
-        if (is2FA === 1) {
-            let isValid = await handleVerifyToken();
-            console.log(isValid);
-            if (!isValid) return;
-        }
-        navigate("/");
+
+
+    const handleNavigation = async () => {
+        navigate("/dashboard")
         setSuccess(true);
+        handleLoggedUser(email)
         setEmail("");
         setPwd("");
-    };
-
-    const handleSubmitSendEmail = async (e) => {
-        e.preventDefault();
-        // Verificare la validità dell'email, se necessario
-        try {
-            const response = await axios.post(
-                "baseUrl" ,
-                {
-                    email: email,
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${process.env.REACT_APP_SECRET_APP}`,
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                }
-            );
-            console.log(response);
-            setShowResetFormPassword(true);
-            setSuccess(true);
-        } catch (err) {
-            setFailure(true);
-            if (err.response) setErrMsg(err.response.data.message);
-            else {
-                console.log(err);
-                setErrMsg("Network Error, check your connection");
-            }
-        }
     };
 
     return (
@@ -233,7 +135,7 @@ const Login = () => {
                         </p>
 
                         <label htmlFor="password" style={{ color: "#9f8b3b" }}>
-                           Login
+                           Password
                         </label>
                         <div className={styles.flexDivPassword}>
                             <input

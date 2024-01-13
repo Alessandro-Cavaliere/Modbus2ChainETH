@@ -1,0 +1,78 @@
+.table_container {
+  overflow-x: auto;
+  padding: 10px 40px 0px 50px;
+}
+
+.copyPopup {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: auto;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.divNoTx {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 480px;
+  gap: 10px;
+  padding-top: 10%;
+  text-align: center;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 3px;
+  z-index: 9999;
+}
+
+.coinType {
+  font-size: 30px;
+  line-height: 100%;
+  color: #c8b568;
+  font-family: var(--font-poppins);
+}
+
+.pStyle {
+  font-size: 30px;
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
+}
+
+td {
+  border-bottom: 1px solid #ccc;
+}
+
+.hovered {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}

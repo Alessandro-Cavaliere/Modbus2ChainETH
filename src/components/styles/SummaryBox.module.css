@@ -1,0 +1,67 @@
+.summaryBox {
+  border-radius: 10px;
+  position: relative;
+  padding: 30px;
+  display: flex;
+  width: 450px;
+  align-items: center;
+  flex-direction: column;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.notarizeText {
+  position: absolute;
+  pointer-events: none;
+  background-color: rgb(10, 136, 42);
+  text-align: center;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-20px) scale(0.9);
+}
+.summaryBox:hover .notarizeText {
+  opacity: 1;
+  transform: translateY(-50px) scale(1); 
+}
+
+.summaryBox:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.liveIndicator {
+  background-color: #ff0000;
+  color: #ffffff;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  animation: blinker 1.5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.summaryBox .icon {
+  font-size: 3rem; /* Regola la dimensione come preferisci */
+  margin-right: 20px;
+}
+
+.summaryBox .textContent h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.summaryBox .textContent p {
+  margin: 5px 0;
+  font-size: 1.5rem;
+  text-align: center;
+}

@@ -3,18 +3,41 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #222737, #37425e);
+  position: relative; /* Aggiunto per posizionare l'elemento ::before rispetto a questo container */
+}
+
+.dashboard-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      to bottom,
+      rgba(34, 39, 55, 0.7),
+      rgba(55, 66, 94, 0.7)
+    ),
+    url("../../assets/Modbus2Chain.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1; 
+  z-index: -1;
 }
 
 .dashboard {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  background: none; /* Rimuovi lo sfondo dal container principale */
 }
 
+/* Restante stile rimane invariato */
+
 .dashboard h1 {
-  margin: 0;  /* Rimuovi margini extra */
-  padding: 0;  /* Rimuovi padding extra */
+  margin: 0; /* Rimuovi margini extra */
+  padding: 0; /* Rimuovi padding extra */
 }
 
 .buttonContainer {
@@ -25,72 +48,17 @@
   gap: 20px;
 }
 
-.wallet,
-.storia,
-.impostazioni,
-.supporto {
+.buttonChildContainer {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: var(--gap-xl);
-  cursor: pointer;
+  gap: 80px;
+  margin-top: 40px;
+  flex-wrap: wrap;
 }
 
-.wallet.active,
-.storia.active,
-.impostazioni.active,
-.supporto.active {
-  color: #c8b568;
-}
-
-.myButton {
-  width: fit-content;
-  margin-top: 10px;
-  padding: 8px 20px;
-  font-size: 14px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.whiteBox, .whiteBoxText{
-  background-color: white;
-  display: inline-block;
-  padding: 5px;  /* Aggiungi un po' di padding se necessario */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  text-align: center;
-  box-sizing: border-box;  /* Assicura che padding e bordi siano inclusi nella dimensione totale */
-}
-
-
-
-.tableContainer {
-  margin-top: 20px;
-  text-align: center;
-  width: 100%;
-}
-
-table {
-  margin: auto;
-  font-size: 24px; /* Imposta la dimensione del font della tabella */
-}
-
-th,
-td {
-  padding: 10px 20px;
-  text-align: center; /* Testo centrato nelle celle */
-}
-
-th {
-  font-size: 32px; /* Imposta la dimensione del font per l'intestazione della tabella */
-}
-
-td {
-  vertical-align: middle; /* Centra verticalmente il testo nelle celle */
+.icons {
+  display: flex;
+  color: #086ebb;
+  height: 50px;
+  width: 50px;
+  transition: ease-in 0.2s;
 }

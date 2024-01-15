@@ -5,47 +5,80 @@ import SummaryBox from "./SummaryBox";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
-const https = require('https');
-
+import Transactions from "./Transactions";
+import { Modal } from "react-bootstrap";
+import { ClipLoader } from "react-spinners";
 const Dashboard = ({user}) => {
   const [temp, setTemp] = useState("")
   const [hum, setHum] = useState("")
   const [latestNotarizedTemp, setLatestNotarizedTemp] = useState("")
   const [latestNotarizedHum, setLatestNotarizedHum] = useState("")
   const [latestTransaction, setLatestTransaction] = useState("")
-  const [loading, setLoading] = useState(false)
   const [cookies, setCookie] = useCookies(["accessToken"]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const notarizedInputRef = useRef(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_MIDDLEWARE_BASE_URL}protected`
-        );
-        console.log(response);
-        setTemp(response.data.random_number); // Assicurati di impostare il dato che ti interessa
-      } catch (err) {
-        console.error(err);
-        if (err.response) {
-          toast.error(err.response.data.error);
+
+  const fetchHum = async () => {
+    try {
+      const response = await axios.get(
+        process.env.REACT_APP_MIDDLEWARE_BASE_URL + "view-humidity",
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.accessToken}`,
+          },
         }
-      }
-    };
+      );
 
-    //fetchData();
-  });
+      setHum(response.data.humidity);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
-  const handleNotarization = async(e,flag,data) => {
+  useEffect(() => {
+    const intervalId = setInterval(fetchHum, 12000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const fetchTemp = async () => {
+    try {
+      const response = await axios.get(
+        process.env.REACT_APP_MIDDLEWARE_BASE_URL + "view-temperature",
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.accessToken}`,
+          },
+        }
+      );
+
+      // Aggiorna i dati nel tuo stato
+      setTemp(response.data.temperature);
+    } catch (err) {
+      console.error(err);
+
+    }
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(fetchTemp, 13000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const handleNotarization = async(e,flag) => {
       if(flag === "Temperature"){
-        setLoading(true)
+        handleShow()
         e.preventDefault();
         try {
             const response = await axios.post(
                 process.env.REACT_APP_MIDDLEWARE_BASE_URL + "notarize-temperature",
                 {
-                    email: 2,
-                    password: 2,
+                    email: cookies.user,
                 },
                 {
                     headers: {
@@ -56,7 +89,7 @@ const Dashboard = ({user}) => {
             );
             setLatestNotarizedTemp(response.data.temperature)
             setLatestTransaction(response.data.blockchain_receipt.hash)
-            setLoading(false)
+            handleClose()
             toast.success("Temperature succsessfull notarized!", {
                 onClose: () => {
                   notarizedInputRef.current.scrollIntoView({
@@ -67,20 +100,30 @@ const Dashboard = ({user}) => {
             });  
           } catch (err) {
             console.log(err)
+            handleClose()
             if (err.response) {
                 toast.error(err.response.data.error)
             } 
         }
       } else {
-        setLoading(true)
+        handleShow()
         e.preventDefault();
         try {
-          const response = await axios.get(
-            process.env.REACT_APP_MIDDLEWARE_BASE_URL + "protected"
+          const response = await axios.post(
+            process.env.REACT_APP_MIDDLEWARE_BASE_URL + "notarize-humidity",
+            {
+              email: cookies.user,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${cookies.accessToken}`,
+                  "Content-Type": "application/x-www-form-urlencoded",
+                }
+            }
           );
-          //setLatestNotarizedHum(response.data.humidity)
-          //setLatestTransaction(response.data.blockchain_receipt.hash)
-          setLoading(false)
+          setLatestNotarizedHum(response.data.humidity)
+          setLatestTransaction(response.data.blockchain_receipt.hash)
+          handleClose()
           toast.success("Humidity succsessfull notarized!", {
               onClose: () => {
                 notarizedInputRef.current.scrollIntoView({
@@ -91,6 +134,7 @@ const Dashboard = ({user}) => {
           });  
         } catch (err) {
             console.log(err)
+            handleClose()
             if (err.response) {
                 toast.error(err.response.data.error)
             } 
@@ -100,7 +144,7 @@ const Dashboard = ({user}) => {
 
   return (
     <>
-    <Navbar user={user}/>
+    <Navbar/>
     <div className={`${styles.dashboard} ${styles["dashboard-container"]}`}>
       <div className={styles.buttonContainer}>
         <div className={styles.buttonChildContainer}>
@@ -111,27 +155,29 @@ const Dashboard = ({user}) => {
             emoij={"🌡️"}
             temp={temp}
             handleNotarization={handleNotarization}
+            latestTransaction={latestTransaction}
           />
           <SummaryBox
             title="Humidity"
             count={30}
-            backgroundColor="#7B629E" 
+            backgroundColor="#7B629E"
+            hum={hum} 
             emoij={"💧"}
             handleNotarization={handleNotarization}
+            latestTransaction={latestTransaction}
           />
         </div>
       </div>
-
-      <div style={{marginTop:50}} ref={notarizedInputRef}>
-      <h1>tabell</h1>
-        <th>
-          <tr>
-
-          </tr>
-        </th>
-      </div>
-
-      
+      <Transactions email={user} notarizedInputRef={notarizedInputRef}/>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header style={{justifyContent:"center"}}>
+          <Modal.Title style={{color: "red",fontWeight: "bold"}}>Notarization</Modal.Title>
+        </Modal.Header>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center",width:"100%"}}>
+        <ClipLoader size={40} color="#000" className={styles.clip} />
+        <Modal.Body style={{fontSize:25, color:"black"}}>Notarization in progress... <br></br> Waiting the validator signing the transaction</Modal.Body>
+        </div>
+      </Modal>
     </div>
     </>
   );

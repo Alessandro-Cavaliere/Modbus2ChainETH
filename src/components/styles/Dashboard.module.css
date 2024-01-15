@@ -62,3 +62,11 @@
   width: 50px;
   transition: ease-in 0.2s;
 }
+
+.clip{
+  border-width: 5px !important;
+  margin-left: 20px;
+  border-color:rgb(20, 160, 219) rgb(20, 160, 219) transparent  !important;
+  width: 49px !important;
+  height: 43px !important;
+}

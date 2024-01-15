@@ -53,6 +53,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+  margin-bottom: 20px;
 }
 
 th,

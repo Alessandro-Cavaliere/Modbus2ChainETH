@@ -6,13 +6,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useCookies } from "react-cookie";
 import Transactions from "./Transactions";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { ClipLoader } from "react-spinners";
 const Dashboard = ({user}) => {
   const [temp, setTemp] = useState("")
   const [hum, setHum] = useState("")
-  const [latestNotarizedTemp, setLatestNotarizedTemp] = useState("")
-  const [latestNotarizedHum, setLatestNotarizedHum] = useState("")
   const [latestTransaction, setLatestTransaction] = useState("")
   const [cookies, setCookie] = useCookies(["accessToken"]);
   const [show, setShow] = useState(false);
@@ -87,7 +85,6 @@ const Dashboard = ({user}) => {
                     }
                 }
             );
-            setLatestNotarizedTemp(response.data.temperature)
             setLatestTransaction(response.data.blockchain_receipt.hash)
             handleClose()
             toast.success("Temperature succsessfull notarized!", {
@@ -121,7 +118,6 @@ const Dashboard = ({user}) => {
                 }
             }
           );
-          setLatestNotarizedHum(response.data.humidity)
           setLatestTransaction(response.data.blockchain_receipt.hash)
           handleClose()
           toast.success("Humidity succsessfull notarized!", {
@@ -142,6 +138,25 @@ const Dashboard = ({user}) => {
       }
   };
 
+  const handleMovement = async(e) => {
+     e.preventDefault()
+     try {
+      const response = await axios.get(
+        process.env.REACT_APP_MIDDLEWARE_BASE_URL + "detects-movement",
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.accessToken}`,
+              "Content-Type": "application/x-www-form-urlencoded",
+            }
+        }
+      );
+    } catch (err) {
+        if (err.response) {
+            toast.error(err.response.data.error)
+        } 
+    }
+  };
+
   return (
     <>
     <Navbar/>
@@ -155,7 +170,6 @@ const Dashboard = ({user}) => {
             emoij={"🌡️"}
             temp={temp}
             handleNotarization={handleNotarization}
-            latestTransaction={latestTransaction}
           />
           <SummaryBox
             title="Humidity"
@@ -164,11 +178,13 @@ const Dashboard = ({user}) => {
             hum={hum} 
             emoij={"💧"}
             handleNotarization={handleNotarization}
-            latestTransaction={latestTransaction}
           />
         </div>
       </div>
-      <Transactions email={user} notarizedInputRef={notarizedInputRef}/>
+      <Transactions latestTransaction={latestTransaction} email={user}/>
+      <div ref={notarizedInputRef}></div>
+
+      <Button style={{marginTop:25}} onClick={(e)=>handleMovement(e)}> Check movement </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header style={{justifyContent:"center"}}>
           <Modal.Title style={{color: "red",fontWeight: "bold"}}>Notarization</Modal.Title>

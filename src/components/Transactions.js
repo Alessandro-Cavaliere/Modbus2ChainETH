@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { format } from "url";
-const Transactions = ({ notarizedInputRef }) => {
+const Transactions = ({ latestTransaction}) => {
   const [transactions, setTransactions] = useState([]);
   const [showTooltip, setShowTooltip] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -102,7 +102,7 @@ const Transactions = ({ notarizedInputRef }) => {
     };
 
     fetchData();
-  }, []);
+  }, [latestTransaction]);
 
   return (
     <>
@@ -124,36 +124,45 @@ const Transactions = ({ notarizedInputRef }) => {
           ) : (
             <div
               className={styles.table_container}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              onMouseMove={handleMouseMove}
             >
               <p className={styles.pStyleTitle} >Transaction List</p>
-              <table ref={notarizedInputRef}>
+              <table>
                 <thead>
                   <tr>
                     <th
                       style={{ color: "#f8312f" }}
                       onMouseEnter={() => handleMouseOver("Transaction ID")}
                       onMouseLeave={handleMouseOut}
+                      onMouseMove={handleMouseMove}
                     >
                       TxID
                     </th>
                     <th
                       onMouseEnter={() => handleMouseOver("Validator Address")}
                       onMouseLeave={handleMouseOut}
+                      onMouseMove={handleMouseMove}
                     >
                       Validator Address
                     </th>
 
                     <th
+                      onMouseEnter={() => handleMouseOver("Block Number")}
                       onMouseLeave={handleMouseOut}
+                      onMouseMove={handleMouseMove}
                     >
                       Block Number
                     </th>
                     <th
+                      onMouseEnter={() => handleMouseOver("Data (Hum or Temp)")}
+                      onMouseLeave={handleMouseOut}
+                      onMouseMove={handleMouseMove}
+                    >
+                      {"Data (Hum or Temp)"}
+                    </th>
+                    <th
                       onMouseEnter={() => handleMouseOver("Date")}
                       onMouseLeave={handleMouseOut}
+                      onMouseMove={handleMouseMove}
                     >
                       Timestamp
                     </th>
@@ -176,6 +185,7 @@ const Transactions = ({ notarizedInputRef }) => {
                       <td
                         onMouseOver={() => handleMouseOver(item.txID)}
                         onMouseOut={handleMouseOut}
+                        onMouseMove={handleMouseMove}
                         onClick={(event) =>
                           handleCopyClick(item.txID, event, "tx")
                         }
@@ -188,6 +198,7 @@ const Transactions = ({ notarizedInputRef }) => {
                           handleMouseOver(item.validator_address)
                         }
                         onMouseOut={handleMouseOut}
+                        onMouseMove={handleMouseMove}
                         onClick={(event) =>
                           handleCopyClick(item.validator_address, event)
                         }
@@ -198,12 +209,21 @@ const Transactions = ({ notarizedInputRef }) => {
                       <td
                         onMouseOver={() => handleMouseOver(item.block_number)}
                         onMouseOut={handleMouseOut}
+                        onMouseMove={handleMouseMove}
                       >
                         {item.block_number}
                       </td>
                       <td
+                        onMouseOver={() => handleMouseOver(item.data)}
+                        onMouseOut={handleMouseOut}
+                        onMouseMove={handleMouseMove}
+                      >
+                        {item.data}
+                      </td>
+                      <td
                         onMouseOver={() => handleMouseOver(formatDate(item.timestamp))}
                         onMouseOut={handleMouseOut}
+                        onMouseMove={handleMouseMove}
                       >
                         {formatDate(item.timestamp)}
                       </td>

@@ -10,8 +10,7 @@ const SummaryBox = ({
   backgroundColor,
   iconColor,
   emoij,
-  handleNotarization,
-  latestTransaction
+  handleNotarization
 }) => {
   const [hover, setHover] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -44,7 +43,7 @@ const SummaryBox = ({
     };
 
     fetchData();
-  }, [latestTransaction]);
+  }, []);
 
   const handleMouseMove = (e) => {
     const bounds = e.currentTarget.getBoundingClientRect();

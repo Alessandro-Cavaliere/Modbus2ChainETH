@@ -66,6 +66,7 @@ const Login = ({handleLoggedUser}) => {
             console.log(response)
             const accessToken = response.data.token;
             setCookie('accessToken', accessToken, { secure: true, sameSite: 'strict' });
+            setCookie('user',email, { secure: true, sameSite: 'strict' })
             toast.success("Correct credentials!", {
                 onClose: () => {
                     handleNavigation()

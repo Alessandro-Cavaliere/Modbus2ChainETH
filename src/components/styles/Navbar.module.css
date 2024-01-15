@@ -22,9 +22,15 @@
 .pstyle{
     align-self: center;
     font-size: 30px;
-    font-family: sans-serif;
     margin: 0;
     color: whitesmoke;
+    font-weight: lighter;
+}
+
+.pstyleCenter{
+    font-size: 40px;
+    margin: 0;
+    color: #14a0db;
     font-weight: bold;
 }
 

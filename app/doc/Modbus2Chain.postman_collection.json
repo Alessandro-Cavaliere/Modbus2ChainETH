@@ -1,0 +1,433 @@
+{
+	"info": {
+		"_postman_id": "647621f5-0519-4b0a-9014-23cb2f96d790",
+		"name": "Modbus2Chain",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26092399"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://192.168.178.21:5000/",
+					"protocol": "https",
+					"host": [
+						"192",
+						"168",
+						"178",
+						"21"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "saasass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alexcav@hotmail.it",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "root",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alexcav00@hotmail.it",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "root",
+							"type": "text"
+						},
+						{
+							"key": "first_name",
+							"value": "alessandro",
+							"type": "text"
+						},
+						{
+							"key": "last_name",
+							"value": "cavaliere",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Temperature",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQ5MDI4MjYsInVzZXIiOnsiX2lkIjoiNjU4MmZjODgyNzJhZDI0YWYxMGQ2MTU2IiwiZW1haWwiOiJhbGV4Y2F2QGhvdG1haWwuaXQiLCJwYXNzd29yZCI6InNoYTI1NiR2clg3VmRxbiRmODE3NGRlY2ViNGJmMzY4ZGMxZTQ1NTY5YjhlZWUyNDUxYjQ2NmQyNmIwNWM1MDg4NDhkNzUwN2ZhNDc2ZTBlIiwiZmlyc3RfbmFtZSI6ImFsZXNzYW5kcm8iLCJsYXN0X25hbWUiOiJjYXZhbGllcmUiLCJhZGRyZXNzIjoiMHg2NkU5OGRDNzEwY2Q5ZTkxYWFGOWVjQTg0ODYzNjcyNzdCYmYxNEY4In19.QXxwdbMkiDPvnaBs4tYsxfyGOtjTHe8mBOVkbTZBw40",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alex@hotmail.it",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/view-temperature",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"view-temperature"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Humidity",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQxNTIzMjEsInVzZXIiOnsiX2lkIjoiNjU4MmZjODgyNzJhZDI0YWYxMGQ2MTU2IiwiZW1haWwiOiJhbGV4Y2F2QGhvdG1haWwuaXQiLCJwYXNzd29yZCI6InNoYTI1NiR2clg3VmRxbiRmODE3NGRlY2ViNGJmMzY4ZGMxZTQ1NTY5YjhlZWUyNDUxYjQ2NmQyNmIwNWM1MDg4NDhkNzUwN2ZhNDc2ZTBlIiwiZmlyc3RfbmFtZSI6ImFsZXNzYW5kcm8iLCJsYXN0X25hbWUiOiJjYXZhbGllcmUiLCJhZGRyZXNzIjoiMHg2NkU5OGRDNzEwY2Q5ZTkxYWFGOWVjQTg0ODYzNjcyNzdCYmYxNEY4In19.xaa4jZJrOIR4DTplj6KONj5EAB1oXA1_yaUtFWXrBXw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alex@hotmail.it",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/view-humidity",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"view-humidity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detects Movement",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQxNTIzMjEsInVzZXIiOnsiX2lkIjoiNjU4MmZjODgyNzJhZDI0YWYxMGQ2MTU2IiwiZW1haWwiOiJhbGV4Y2F2QGhvdG1haWwuaXQiLCJwYXNzd29yZCI6InNoYTI1NiR2clg3VmRxbiRmODE3NGRlY2ViNGJmMzY4ZGMxZTQ1NTY5YjhlZWUyNDUxYjQ2NmQyNmIwNWM1MDg4NDhkNzUwN2ZhNDc2ZTBlIiwiZmlyc3RfbmFtZSI6ImFsZXNzYW5kcm8iLCJsYXN0X25hbWUiOiJjYXZhbGllcmUiLCJhZGRyZXNzIjoiMHg2NkU5OGRDNzEwY2Q5ZTkxYWFGOWVjQTg0ODYzNjcyNzdCYmYxNEY4In19.xaa4jZJrOIR4DTplj6KONj5EAB1oXA1_yaUtFWXrBXw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alex@hotmail.it",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/detects-movement",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"detects-movement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Notarize Temperature",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDUyNTMwNjksInVzZXIiOnsiX2lkIjoiNjVhNDExMjZkZTYzMzllZjAwY2RiZTdkIiwiZW1haWwiOiJhbGV4Y2F2YWxpZXJlQGhvdG1haWwuaXQiLCJwYXNzd29yZCI6InNjcnlwdDozMjc2ODo4OjEkSFFRdE1yWG1ReUd4UG1SQyQ1ZTNiYzdhNjY1MjU0MjIzZjQwMzYzNmI1NWM2MDJkM2QyOWIwZTk4MjdhMzk5ZjljZjg2ODZlYjM3NWM2NTAzMGI4OThmMWIwNTkwYzhmNzY1ZDQ0OTVjNDI3NDI2NTNiMGZkZDFlNWVmOGYzMWM1ZTNmOWRjYzllOTFkYWNmNiIsImZpcnN0X25hbWUiOiJhbGVzc2FuZHJvIiwibGFzdF9uYW1lIjoiY2F2YWxpZXJlIn19.CdZgezLr32NPkVOby1ZEKNaKgxqIYExpzZf2obmJAik",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alex@hotmail.it",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/notarize-temperature",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notarize-temperature"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Notarize Humidity",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQxNTIzMjEsInVzZXIiOnsiX2lkIjoiNjU4MmZjODgyNzJhZDI0YWYxMGQ2MTU2IiwiZW1haWwiOiJhbGV4Y2F2QGhvdG1haWwuaXQiLCJwYXNzd29yZCI6InNoYTI1NiR2clg3VmRxbiRmODE3NGRlY2ViNGJmMzY4ZGMxZTQ1NTY5YjhlZWUyNDUxYjQ2NmQyNmIwNWM1MDg4NDhkNzUwN2ZhNDc2ZTBlIiwiZmlyc3RfbmFtZSI6ImFsZXNzYW5kcm8iLCJsYXN0X25hbWUiOiJjYXZhbGllcmUiLCJhZGRyZXNzIjoiMHg2NkU5OGRDNzEwY2Q5ZTkxYWFGOWVjQTg0ODYzNjcyNzdCYmYxNEY4In19.xaa4jZJrOIR4DTplj6KONj5EAB1oXA1_yaUtFWXrBXw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alex@hotmail.it",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/notarize-humidity",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"notarize-humidity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transactions",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQxNTIzMjEsInVzZXIiOnsiX2lkIjoiNjU4MmZjODgyNzJhZDI0YWYxMGQ2MTU2IiwiZW1haWwiOiJhbGV4Y2F2QGhvdG1haWwuaXQiLCJwYXNzd29yZCI6InNoYTI1NiR2clg3VmRxbiRmODE3NGRlY2ViNGJmMzY4ZGMxZTQ1NTY5YjhlZWUyNDUxYjQ2NmQyNmIwNWM1MDg4NDhkNzUwN2ZhNDc2ZTBlIiwiZmlyc3RfbmFtZSI6ImFsZXNzYW5kcm8iLCJsYXN0X25hbWUiOiJjYXZhbGllcmUiLCJhZGRyZXNzIjoiMHg2NkU5OGRDNzEwY2Q5ZTkxYWFGOWVjQTg0ODYzNjcyNzdCYmYxNEY4In19.xaa4jZJrOIR4DTplj6KONj5EAB1oXA1_yaUtFWXrBXw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "alexcavaliere@hotmail.it",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/get-transactions",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"get-transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://192.168.226.174:5000/",
+			"type": "string"
+		}
+	]
+}

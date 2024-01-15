@@ -22,7 +22,6 @@
   align-items: center;
   width: 480px;
   gap: 10px;
-  padding-top: 10%;
   text-align: center;
 }
 
@@ -39,13 +38,15 @@
 .coinType {
   font-size: 30px;
   line-height: 100%;
-  color: #c8b568;
+  color: #14a0db;
   font-family: var(--font-poppins);
 }
 
 .pStyle {
   font-size: 30px;
   margin: 0;
+  border-radius: 20px;
+  background-color: #f5f5f5;
 }
 
 table {
@@ -69,6 +70,35 @@ th {
   color: #333;
 }
 
+.pStyleTitle {
+    font-size: 40px;
+    color: white;
+    text-align: center;
+    margin: 20px;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.divRow{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: inherit;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.divLoading{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+tr {
+    background: #ffffff75;
+}
 td {
   border-bottom: 1px solid #ccc;
 }

@@ -33,8 +33,8 @@ The system workflow begins with the collection of environmental data from sensor
 ⬇️Below, a graphic diagram of the workflow in order to make it easier to understand and interact between the different components of the system⬇️.
 
 <picture>
-  <source srcset="./app/assets/ArchitectureDiagram.png" media="(min-width: 680px)">
-  <img src="./app/assets/ArchitectureDiagram.png" alt="ArchitectureDiagram">
+  <source srcset="./app/assets/ArchitectureDiagram.jpg" media="(min-width: 680px)">
+  <img src="./app/assets/ArchitectureDiagram.jpg" alt="ArchitectureDiagram">
 </picture>
 
 

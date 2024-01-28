@@ -7,17 +7,22 @@ Welcome to the `Modbus2Chain` Front-End application! This simple interface aims 
 ![Modbus2Chain Overview](./readme_assets/Dashboard.png)
 
 ## Features
---------
 
 - **User Authentication**: The application employs JWT (JSON Web Tokens) to provide secure login and signup functionality to access.
 
 ⬇️Below is a screen of a screen of the Login form⬇️.
-![Login Screenshot](./readme_assets/LoginPage.png)
+<picture>
+  <source srcset="./readme_assets/LoginPage.png" media="(min-width: 300px)">
+  <img src="./readme_assets/LoginPage.png" alt="LoginPage">
+</picture>
 
 Once logged into the application, the system will check whether the logged in user is part of a `Hyperledger Fabric` network organization and has the appropriate permissions to operate on the network. If so, the user will be able to notarize and view the transaction list, otherwise, he will only be able to view the temperature and humidity data provided by the detection sensors
 
 ⬇️Below is a screen of a screen of the Registration form⬇️.
-![Signup Screenshot](./readme_assets/RegistrationPage.png)
+<picture>
+  <source srcset="./readme_assets/RegistrationPage.png" media="(min-width: 300px)">
+  <img src="./readme_assets/RegistrationPage.png" alt="RegistrationPage">
+</picture>
 
 User registration allows you to save the data entered within `MongoDB`, the database used by Modbus2Chain for saving user data and for the correct organization of the set of transactions carried out, thus helping to speed up the process of data visualization, avoiding continuously querying the blockchain.
 
@@ -26,7 +31,6 @@ User registration allows you to save the data entered within `MongoDB`, the data
 - **Transaction List**: View a detailed list of all transactions, including validator addresses, block numbers, data, and timestamps.
 
 ## Getting Started
---------
 
 Follow these instructions to set up your local development environment:
 
@@ -34,7 +38,6 @@ Follow these instructions to set up your local development environment:
 2. Install dependencies with `npm install`.
 
 ## Start the Application
---------
 
 - `npm start`: Runs the app at [https://localhost:3000](https://localhost:3000).
 

@@ -1,8 +1,8 @@
 # Blockchain & Back-End Application
 
-The project consists of a back-end based on Hyperledger Fabric, an enterprise blockchain platform, and middleware written in Python. The goal of the project is to provide a secure and reliable infrastructure for managing environmental data collected from IoT devices using the Modbus TCP protocol.
+The project consists of a back-end based on a PoA Geth Blockchain and a middleware written in Python. The goal of the project is to provide a secure and reliable infrastructure for managing environmental data collected from IoT devices using the Modbus TCP protocol.
 
-The middleware in Python is used to convert Modbus data into formats readable by the Hyperledger Fabric blockchain, thus enabling secure and reliable recording and management of environmental data.
+The middleware in Python is used to convert Modbus data into formats readable by the Geth private blockchain, thus enabling secure and reliable recording and management of environmental data.
 
 The IoT device communication framework is written in Python and is part of the back-end. The project can be used in different contexts, such as for real-time environmental data management, tracking, or smart contract management. Due to its modularity and flexibility, the project can be easily adapted to the specific needs of different organizations.
 
@@ -26,7 +26,7 @@ Install all dependencies with ***pip***:
 ## ⚙️ Blockchain Configuration 
 To create a private blockchain network using Geth, we need to do a few things first:
 
-1. First of all you need to write your `genesis.json` file:
+### 1. First of all you need to write your `genesis.json` file:
 
 ⬇️Below an example⬇️
 ```
@@ -68,7 +68,7 @@ In this project we use the clique field in the genesis file, in such a way as to
 
 For more details, see the official documentation here ➡️ [Private Network Docs](https://geth.ethereum.org/docs/fundamentals/private-network)
 
-2. Generate new addresses to use them as validators (if you already have addresses, skip this part):
+### 2. Generate new addresses to use them as validators (if you already have addresses, skip this part):
 
 Run this command:
 ```
@@ -78,7 +78,7 @@ This command, in addition to displaying the generated address, will ask you for 
 The public address, if you want to make it validator, must be inserted, as anticipated, in the extradata field and in the alloc field.
 You will also create a folder named `data` which in turn contains a folder named `keystore`, in which there will be all the encrypted keys that you will generate.
 
-3. Initializing the Geth Database:
+### 3. Initializing the Geth Database:
 
 Now, after inserting the validator addresses into Genesis, we move on to creating a blockchain node that uses this Genesis block. To do this, first use `geth init` to import and set the canonical genesis block for the new chain. This requires the path to genesis.json to be passed as an argument.
 
@@ -88,7 +88,7 @@ Now, after inserting the validator addresses into Genesis, we move on to creatin
 You can run this command for as many blocks as you want, the important thing is to use different datadir names.
 
 
-4. Set up a peer-to-peer network:
+### 4. Set up a peer-to-peer network:
 
 After creating your N blocks and your N folders, you can launch each node through this command, changing its ports and addresses.
 ```

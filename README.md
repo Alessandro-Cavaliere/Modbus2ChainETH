@@ -30,6 +30,8 @@ User registration allows you to save the data entered within `MongoDB`, the data
 
 - **Transaction List**: View a detailed list of all transactions, including validator addresses, block numbers, data, and timestamps.
 
+The list of transactions displayed corresponds to all blockchain notarizations carried out by authorized users.
+
 ## Getting Started
 
 Follow these instructions to set up your local development environment:

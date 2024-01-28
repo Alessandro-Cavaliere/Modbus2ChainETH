@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Modbus2Chain Front-End Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the `Modbus2Chain` Front-End application! This simple interface aims to make all the functions implemented by the Back-End of the application accessible in a user-friendly manner, from the visualization of the data taken from the IoT devices, up to the notarization of the data on the blockchain.
 
-## Available Scripts
+⬇️Below is a screen of the application dashboard that will be shown⬇️.
 
-In the project directory, you can run:
+![Modbus2Chain Overview](./readme_assets/Dashboard.png)
 
-### `npm start`
+## Features
+--------
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **User Authentication**: The application employs JWT (JSON Web Tokens) to provide secure login and signup functionality to access.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+⬇️Below is a screen of a screen of the Login form⬇️.
+![Login Screenshot](./readme_assets/LoginPage.png)
 
-### `npm test`
+Once logged into the application, the system will check whether the logged in user is part of a `Hyperledger Fabric` network organization and has the appropriate permissions to operate on the network. If so, the user will be able to notarize and view the transaction list, otherwise, he will only be able to view the temperature and humidity data provided by the detection sensors
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+⬇️Below is a screen of a screen of the Registration form⬇️.
+![Signup Screenshot](./readme_assets/RegistrationPage.png)
 
-### `npm run build`
+User registration allows you to save the data entered within `MongoDB`, the database used by Modbus2Chain for saving user data and for the correct organization of the set of transactions carried out, thus helping to speed up the process of data visualization, avoiding continuously querying the blockchain.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Data Monitoring**: Near real-time monitoring of humidity and temperature detected by sensors.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Transaction List**: View a detailed list of all transactions, including validator addresses, block numbers, data, and timestamps.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Getting Started
+--------
 
-### `npm run eject`
+Follow these instructions to set up your local development environment:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. If you have already cloned the repository, switch to the MC_FE branch
+2. Install dependencies with `npm install`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Start the Application
+--------
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- `npm start`: Runs the app at [https://localhost:3000](https://localhost:3000).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The following project has been set up to work on **HTTPS** communication with self-signed certificates for testing and study purposes only. Obviously it is not a configuration to be used in production environments.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+You will need to create your own self-signed certificates or use valid certificates. These must be set for both the middleware and the React application.

@@ -12,16 +12,16 @@ Welcome to the `Modbus2Chain` Front-End application! This simple interface aims 
 
 ⬇️Below is a screen of a screen of the Login form⬇️.
 <picture>
-  <source srcset="./readme_assets/LoginPage.png" media="(min-width: 300px)">
-  <img src="./readme_assets/LoginPage.png" alt="LoginPage">
+  <source srcset="./readme_assets/LoginPage.png">
+  <img src="./readme_assets/LoginPage.png" alt="LoginPage" width="300">
 </picture>
 
 Once logged into the application, the system will check whether the logged in user is part of a `Hyperledger Fabric` network organization and has the appropriate permissions to operate on the network. If so, the user will be able to notarize and view the transaction list, otherwise, he will only be able to view the temperature and humidity data provided by the detection sensors
 
 ⬇️Below is a screen of a screen of the Registration form⬇️.
 <picture>
-  <source srcset="./readme_assets/RegistrationPage.png" media="(min-width: 300px)">
-  <img src="./readme_assets/RegistrationPage.png" alt="RegistrationPage">
+  <source srcset="./readme_assets/RegistrationPage.png" >
+  <img src="./readme_assets/RegistrationPage.png" alt="RegistrationPage" width="300">
 </picture>
 
 User registration allows you to save the data entered within `MongoDB`, the database used by Modbus2Chain for saving user data and for the correct organization of the set of transactions carried out, thus helping to speed up the process of data visualization, avoiding continuously querying the blockchain.

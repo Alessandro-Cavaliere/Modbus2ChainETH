@@ -6,7 +6,7 @@ The middleware in Python is used to convert Modbus data into formats readable by
 
 The IoT device communication framework is written in Python and is part of the back-end. The project can be used in different contexts, such as for real-time environmental data management, tracking, or smart contract management. Due to its modularity and flexibility, the project can be easily adapted to the specific needs of different organizations.
 
-In summary, the project provides a robust and secure infrastructure for managing environmental data taken from IoT devices using the Modbus TCP protocol, based on Hyperledger Fabric and middleware in Python.
+In summary, the project provides a robust and secure infrastructure for managing environmental data taken from IoT devices using the Modbus TCP protocol, based on private Ethereum blockchain using Geth and middleware in Python.
 
 ## 📚 Pre-requisite
 The following is the list of requirements for the application to function properly
